@@ -1,13 +1,12 @@
 import "../styles/index.css";
 import { initialCards } from "./initialCards";
 import { handleDeleteCard, likeCard, cardCreate } from "./cards";
-import { openModal, closeModal } from "./modals";
+import { closeModal, openModal } from "./modals";
 
 const cardContainer = document.querySelector(".places__list");
 const cardForm = document.forms["new-place"];
 const placeName = cardForm["place-name"];
 const placeLink = cardForm["link"];
-
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupNewCard = document.querySelector(".popup_type_new-card");
 const popupImage = document.querySelector(".popup_type_image");

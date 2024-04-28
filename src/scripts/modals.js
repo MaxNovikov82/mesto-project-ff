@@ -18,7 +18,7 @@ const handleClickOutside = (evt) => {
 };
 
 const handleOnEscape = (evt) => {
-  if (evt.key === "Escape" || evt.keyCode === 27) {
+  if (evt.key === "Escape") {
     const openPopup = document.querySelector(".popup_is-opened");
     closeModal(openPopup);
   }

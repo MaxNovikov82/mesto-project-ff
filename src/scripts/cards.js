@@ -1,6 +1,5 @@
-import { openModal } from "./modals";
 const cardTemplate = document.querySelector("#card-template");
-
+import { openModal } from "./modals";
 export const handleDeleteCard = (event) => {
   const card = event.target.closest("li");
   card.remove();
