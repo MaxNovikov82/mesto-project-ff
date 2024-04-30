@@ -1,6 +1,5 @@
 import "../styles/index.css";
-import { initialCards } from "./initialCards";
-import { handleDeleteCard, likeCard, cardCreate } from "./cards";
+import { initialCards } from "./cards";
 import { closeModal, openModal } from "./modals";
 
 const cardContainer = document.querySelector(".places__list");
@@ -12,6 +11,7 @@ const popupNewCard = document.querySelector(".popup_type_new-card");
 const popupImage = document.querySelector(".popup_type_image");
 const popupImagePicture = popupImage.querySelector(".popup__image");
 const popupImageCaption = popupImage.querySelector(".popup__caption");
+const cardTemplate = document.querySelector("#card-template");
 
 const profileInfoButton = document.querySelector(".profile__edit-button");
 const profileAddCardButton = document.querySelector(".profile__add-button");
@@ -28,6 +28,34 @@ const zoomImage = (openModal, card) => {
   popupImagePicture.alt = card.name;
   popupImageCaption.textContent = card.name;
   openModal(popupImage);
+};
+
+export const handleDeleteCard = (event) => {
+  const card = event.target.closest("li");
+  card.remove();
+};
+
+const likeCard = (likeButton) => {
+  likeButton.classList.toggle("card__like-button_is-active");
+};
+
+const cardCreate = (card, deleteCard, likeCard, zoomImage) => {
+  const cardElement = cardTemplate.cloneNode(true).content;
+  const cardImage = cardElement.querySelector(".card__image");
+  const cardDescription = cardElement.querySelector(".card__description");
+  const cardTitle = cardDescription.querySelector(".card__title");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+  const likeButton = cardElement.querySelector(".card__like-button");
+
+  cardImage.src = card.link;
+  cardImage.alt = card.name;
+  cardTitle.textContent = card.name;
+
+  deleteButton.addEventListener("click", (event) => deleteCard(event));
+  likeButton.addEventListener("click", () => likeCard(likeButton));
+  cardImage.addEventListener("click", () => zoomImage(openModal, card));
+
+  return cardElement;
 };
 
 initialCards.forEach((card) => {
