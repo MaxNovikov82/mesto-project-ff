@@ -1,6 +1,7 @@
 import "../styles/index.css";
-import { initialCards } from "./cards";
+import { initialCards } from "./initialCards";
 import { closeModal, openModal } from "./modals";
+import { handleDeleteCard, likeCard } from "./cards";
 
 const cardContainer = document.querySelector(".places__list");
 const cardForm = document.forms["new-place"];
@@ -23,22 +24,6 @@ const jobInput = profileForm.description;
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__description");
 
-const zoomImage = (openModal, card) => {
-  popupImagePicture.src = card.link;
-  popupImagePicture.alt = card.name;
-  popupImageCaption.textContent = card.name;
-  openModal(popupImage);
-};
-
-export const handleDeleteCard = (event) => {
-  const card = event.target.closest("li");
-  card.remove();
-};
-
-const likeCard = (likeButton) => {
-  likeButton.classList.toggle("card__like-button_is-active");
-};
-
 const cardCreate = (card, deleteCard, likeCard, zoomImage) => {
   const cardElement = cardTemplate.cloneNode(true).content;
   const cardImage = cardElement.querySelector(".card__image");
@@ -56,6 +41,13 @@ const cardCreate = (card, deleteCard, likeCard, zoomImage) => {
   cardImage.addEventListener("click", () => zoomImage(openModal, card));
 
   return cardElement;
+};
+
+const zoomImage = (openModal, card) => {
+  popupImagePicture.src = card.link;
+  popupImagePicture.alt = card.name;
+  popupImageCaption.textContent = card.name;
+  openModal(popupImage);
 };
 
 initialCards.forEach((card) => {
